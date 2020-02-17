@@ -20,5 +20,12 @@ namespace WeBuyCars.LogicalLayer
             return vehicleTypesList;
         }
 
+        public static void DisplayVehicleTypes()
+        {
+            foreach (var item in vehicleTypesList)
+            {
+                Console.WriteLine($"Code : {item.Id} {item.VehicleTypeName}");
+            }
+        }
     }
 }
