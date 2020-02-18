@@ -1,5 +1,6 @@
 ﻿using System;
 using WeBuyCars.LogicalLayer;
+using WeBuyCars.Models;
 
 namespace WeBuyCars
 {
@@ -7,10 +8,14 @@ namespace WeBuyCars
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+         
             VehicleTypeLogicLayer.DisplayVehicleTypes();
-            var vcode = Console.ReadLine();// search the Models and Makes for The vehicleType
-            
+            var vcode = int.Parse(Console.ReadLine());// search the Models and Makes for The vehicleType
+            ModelsLogicLayer.GetMakeBasedOnModel(vcode);
+            var modelId = int.Parse(Console.ReadLine());
+            ModelsLogicLayer.GetModels(modelId);
+
+            var car = new Vehicle(vcode,1,20000,1,1,200000,2018);
             Console.ReadKey();
         }
     }

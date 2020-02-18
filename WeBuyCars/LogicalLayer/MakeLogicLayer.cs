@@ -19,5 +19,14 @@ namespace WeBuyCars.LogicalLayer
             };
             return MakesList;
         }
+
+        public static string GetMake(int makeId)
+        {
+            foreach(var item in MakesList)
+            {
+                if (item.Id == makeId) return item.MakeName;
+            }
+            return "";
+        }
     }
 }

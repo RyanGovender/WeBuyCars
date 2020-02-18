@@ -8,6 +8,7 @@ namespace WeBuyCars.LogicalLayer
    public class ModelsLogicLayer
     {
         public static List<Model> modelsList = GetAllModels();
+        private static List<int> makeIdList = new List<int>();
 
         public static List<Model> GetAllModels()
         {
@@ -23,6 +24,29 @@ namespace WeBuyCars.LogicalLayer
                 new Model(8,3,"M3",1)
             };
             return modelsList;
+        }
+
+        public static void GetMakeBasedOnModel(int vehicletypeId)
+        {
+            foreach (var item in modelsList)
+            {
+                if(item.VehicleTypeId == vehicletypeId && !makeIdList.Contains(item.MakeId))
+                {
+                    Console.WriteLine($"{item.MakeId} Make: {MakeLogicLayer.GetMake(item.MakeId)}");
+                    makeIdList.Add(item.MakeId);
+                }
+            }
+        }
+
+        public static void GetModels(int makeId)
+        {
+            foreach (var item in modelsList)
+            {
+                if(item.MakeId == makeId)
+                {
+                    Console.WriteLine($"{item.Id} - {item.ModelName}");
+                }
+            }
         }
     }
 }

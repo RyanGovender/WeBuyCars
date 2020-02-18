@@ -6,16 +6,24 @@ namespace WeBuyCars.Models
 {
     public class Vehicle
     {
-        public int Id { get; }
         public int VehicleTypeId { get; set; }
-        public int ModelId { get; }
-        public string Specs { get; set; }
+        public int Specs { get; set; }
         public int Millage { get; }
-        public string Color { get; }
-        public string ServiceHistory { get; }
+        public int Color { get; }
+        public int ServiceHistory { get; }
         public double BookValue { get; }
         public int Year { get; }
 
+        public Vehicle(int vehicleTypeId,int specs, int millage, int color, int serviceHistroy,double bookvalue, int year)
+        {
+            VehicleTypeId = vehicleTypeId;
+            Specs = specs;
+            Millage = millage;
+            Color = color;
+            ServiceHistory = serviceHistroy;
+            BookValue = bookvalue;
+            Year = year;
+        }
 
         
     }
