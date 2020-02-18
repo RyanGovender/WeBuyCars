@@ -24,7 +24,8 @@ namespace WeBuyCars.LogicalLayer
             {
                 GetVehicleTypes();
 
-            } while (!confirm());
+            } while (!ConfirmAvailableVehicle());
+
             GetMakes();
             GetBookValue();
             GetYear();
@@ -35,15 +36,15 @@ namespace WeBuyCars.LogicalLayer
 
             var car = new VehicleLogicLayer(_vehicleType, _specs, _millage, _paint, _serviceHistory, _booKValue, _year);
 
-            Console.WriteLine("\nFinal Cost :" + car.CalculateTotalCost());
+            DisplayConsole("\nFinal Cost :" + car.CalculateTotalCost());
             Console.ReadKey();
         }
 
-        public static bool confirm()
+        public static bool ConfirmAvailableVehicle()
         {
             if(ModelsLogicLayer.VehicleTypeCount == _minValue)
             {
-                Console.WriteLine("None of the selected vehicle are available.");
+                DisplayConsole("None of the selected vehicle are available.");
                 return false;
             }
             return true;
@@ -52,11 +53,10 @@ namespace WeBuyCars.LogicalLayer
 
         public static void GetVehicleTypes()
         {
-            string x;
             VehicleTypeLogicLayer.DisplayVehicleTypes();
             do
             {
-                Console.WriteLine("Enter The code of the type of vehicle :");
+                DisplayConsole("Enter The code of the type of vehicle :");
             } while (!int.TryParse(Console.ReadLine(), out _vehicleType) || _vehicleType < _minValue || _vehicleType > VehicleTypeLogicLayer.vehicleTypesList.Count);
             ModelsLogicLayer.GetMakeBasedOnModel(_vehicleType);
 
@@ -66,15 +66,15 @@ namespace WeBuyCars.LogicalLayer
         {
             do
             {
-                Console.WriteLine("Enter the code of the Make : ");
+                DisplayConsole("Enter the code of the Make : ");
                 
             } while (!int.TryParse(Console.ReadLine(), out _make) || _make < _minValue ||_make > MakeLogicLayer.GetAllMakes().Count);
-             ModelsLogicLayer.GetModels(_make);
+             ModelsLogicLayer.GetModels(_make,_vehicleType);
 
             string temp;
             do
             {
-                Console.WriteLine("Enter the code of the Model : ");
+                DisplayConsole("Enter the code of the Model : ");
                 temp = Console.ReadLine();
                 if(temp.Equals(ModelsLogicLayer.NotSureValue))
                 {
@@ -88,7 +88,7 @@ namespace WeBuyCars.LogicalLayer
         {
             do
             {
-                Console.WriteLine("Enter The Millage of the vehicle : ");
+                DisplayConsole("Enter The Millage of the vehicle : ");
 
             } while (!int.TryParse(Console.ReadLine(), out _millage) || _millage > VehicleLogicLayer.MaxMillage || _millage < VehicleLogicLayer.MinMillage);
         }
@@ -98,17 +98,17 @@ namespace WeBuyCars.LogicalLayer
             DisplayDataLogicLayer.DisplaySpecsList();
             do
             {
-                Console.WriteLine("\nEnter the Code of the Specs for the vehicle : ");
+                DisplayConsole("\nEnter the Code of the Specs for the vehicle : ");
 
             } while (!int.TryParse(Console.ReadLine(), out _specs) || _specs < _minValue || _specs > DataLayer.GetSpecsCostData().Count); // add max 
         }
 
         public static void GetPaint()
         {
-            DisplayDataLogicLayer.DisplayPaintTypes();
+            DisplayDataLogicLayer.DisplayPaintTypes(_vehicleType);
             do
             {
-                Console.WriteLine("\nEnter the Code for the paint used on the vehicle : ");
+                DisplayConsole("\nEnter the Code for the paint used on the vehicle : ");
 
             } while (!int.TryParse(Console.ReadLine(), out _paint) || _paint < _minValue || _paint > DataLayer.GetPaintTypes().Count); // add max
         }
@@ -118,7 +118,7 @@ namespace WeBuyCars.LogicalLayer
             DisplayDataLogicLayer.DisplayServiceTypes();
             do
             {
-                Console.WriteLine("\nEnter the Code for the Service History on the vehicle : ");
+                DisplayConsole("\nEnter the Code for the Service History on the vehicle : ");
 
             } while (!int.TryParse(Console.ReadLine(), out _serviceHistory) || _serviceHistory < _minValue || _serviceHistory > DataLayer.ServiceTypes().Count);
         }
@@ -126,7 +126,7 @@ namespace WeBuyCars.LogicalLayer
         {
             do
             {
-                Console.WriteLine("\nEnter the Year of the vehicle : ");
+                DisplayConsole("\nEnter the Year of the vehicle : ");
 
             } while (!int.TryParse(Console.ReadLine(), out _year) || _year < VehicleLogicLayer.minYear || _year > DateTime.Now.Year);
         }
@@ -135,9 +135,14 @@ namespace WeBuyCars.LogicalLayer
         {
             do
             {
-                Console.WriteLine("\nEnter the Book Value of the vehicle : ");
+                DisplayConsole("\nEnter the Book Value of the vehicle : ");
 
             } while (!double.TryParse(Console.ReadLine(), out _booKValue) || _booKValue < _minValue || _booKValue > VehicleLogicLayer.MaxValue);
+        }
+
+        private static void DisplayConsole(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

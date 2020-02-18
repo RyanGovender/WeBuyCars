@@ -14,11 +14,11 @@ namespace WeBuyCars.LogicalLayer
             }
         }
 
-        public static void DisplayPaintTypes()
+        public static void DisplayPaintTypes(int vehicleId)
         {
             foreach(var item in DataLayer.GetPaintTypes())
             {
-                DisplayConsole(item.Item1.ToString(), item.Item2);
+              DisplayConsole(item.Item1.ToString(), item.Item2);
             }
         }
 
@@ -32,7 +32,7 @@ namespace WeBuyCars.LogicalLayer
 
         private static void DisplayConsole(string item1, string item2)
         {
-            Console.WriteLine($"({item1}) - {item2}");
+            Console.WriteLine($"\t({item1}) - {item2}");
         }
     }
 }

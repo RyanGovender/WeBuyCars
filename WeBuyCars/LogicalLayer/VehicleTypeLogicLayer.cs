@@ -24,7 +24,7 @@ namespace WeBuyCars.LogicalLayer
         {
             foreach (var item in vehicleTypesList)
             {
-                Console.WriteLine($"Code : {item.Id} {item.VehicleTypeName}");
+                Console.WriteLine($"\t({item.Id}) - {item.VehicleTypeName}");
             }
         }
     }

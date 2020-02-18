@@ -26,7 +26,8 @@ namespace WeBuyCars.LogicalLayer
                 new Model(5,2,"A45",1),
                 new Model(6,2,"C200",1),
                 new Model(7,2,"CLA45",1),
-                new Model(8,3,"M3",1)
+                new Model(8,3,"M3",1),
+                new Model(9,1,"H2000",2)
             };
             return modelsList;
         }
@@ -38,24 +39,24 @@ namespace WeBuyCars.LogicalLayer
                 if(item.VehicleTypeId == vehicletypeId && !makeIdList.Contains(item.MakeId))
                 {
                     VehicleTypeCount++;
-                    Console.WriteLine($"{item.MakeId} Make: {MakeLogicLayer.GetMake(item.MakeId)}");
+                    Console.WriteLine($"\t({item.MakeId}) - {MakeLogicLayer.GetMake(item.MakeId)}");
                     makeIdList.Add(item.MakeId);
                 }
             }
         }
 
-        public static void GetModels(int makeId)
+        public static void GetModels(int makeId,int vehicleType)
         {
             foreach (var item in modelsList)
             {
-                if(item.MakeId == makeId)
+                if(item.MakeId == makeId && vehicleType== item.VehicleTypeId)
                 {
                     if (MinId == _minValue) MinId = item.Id;
-                    Console.WriteLine($"{item.Id} - {item.ModelName}");
+                    Console.WriteLine($"\t({item.Id}) - {item.ModelName}");
                     MaxId=item.Id;
                 }
             }
-            Console.WriteLine($"{NotSureValue} - Not Sure");
+            Console.WriteLine($"\t({NotSureValue}) - Not Sure");
         }
     }
 }
