@@ -35,7 +35,7 @@ namespace WeBuyCars.LogicalLayer
 
             var car = new VehicleLogicLayer(_vehicleType, _specs, _millage, _paint, _serviceHistory, _booKValue, _year);
 
-            Console.WriteLine("Cost :" + car.CalculateTotalCost());
+            Console.WriteLine("\nFinal Cost :" + car.CalculateTotalCost());
             Console.ReadKey();
         }
 
@@ -52,11 +52,11 @@ namespace WeBuyCars.LogicalLayer
 
         public static void GetVehicleTypes()
         {
+            string x;
             VehicleTypeLogicLayer.DisplayVehicleTypes();
             do
             {
                 Console.WriteLine("Enter The code of the type of vehicle :");
-
             } while (!int.TryParse(Console.ReadLine(), out _vehicleType) || _vehicleType < _minValue || _vehicleType > VehicleTypeLogicLayer.vehicleTypesList.Count);
             ModelsLogicLayer.GetMakeBasedOnModel(_vehicleType);
 
@@ -71,12 +71,16 @@ namespace WeBuyCars.LogicalLayer
             } while (!int.TryParse(Console.ReadLine(), out _make) || _make < _minValue ||_make > MakeLogicLayer.GetAllMakes().Count);
              ModelsLogicLayer.GetModels(_make);
 
-
+            string temp;
             do
             {
                 Console.WriteLine("Enter the code of the Model : ");
-                
-            } while (!int.TryParse(Console.ReadLine(), out _model) || _model < ModelsLogicLayer.MinId || _model > ModelsLogicLayer.MaxId);
+                temp = Console.ReadLine();
+                if(temp.Equals(ModelsLogicLayer.NotSureValue))
+                {
+                    break;
+                }
+            } while (!int.TryParse(temp, out _model) || _model < ModelsLogicLayer.MinId || _model > ModelsLogicLayer.MaxId);
            
         }
 

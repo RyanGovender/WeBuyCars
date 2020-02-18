@@ -13,6 +13,7 @@ namespace WeBuyCars.LogicalLayer
         public static int MaxId = 0;
         public static int VehicleTypeCount = 0;
         private static int _minValue = 0;
+        public static string NotSureValue = "*";
 
         public static List<Model> GetAllModels()
         {
@@ -54,7 +55,7 @@ namespace WeBuyCars.LogicalLayer
                     MaxId=item.Id;
                 }
             }
-            Console.WriteLine($"{_minValue} - Not Sure");
+            Console.WriteLine($"{NotSureValue} - Not Sure");
         }
     }
 }
