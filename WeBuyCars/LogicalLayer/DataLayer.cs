@@ -20,6 +20,30 @@ namespace WeBuyCars.LogicalLayer
             return list;
         }
 
+        public static Dictionary<int,string> ServiceTypes()
+        {
+            var serviceTypes = new Dictionary<int, string>
+            {
+                {1,"Full Service History" },
+                {2,"Partial Service History" },
+                {3,"No Service Histroy" }
+            };
+
+            return serviceTypes;
+        }
+
+        public static Dictionary<int,string> SpecTypes()
+        {
+            var specs = new Dictionary<int, string>
+            {
+                {1,"High Spec" },
+                {2,"Medium Spec" },
+                {3,"Low Spec" }
+            };
+
+            return specs;
+        }
+
         public static Dictionary<int,double> GetSpecsCostData()
         {
             var specsData = new Dictionary<int, double> // Specs Type - Extra cost

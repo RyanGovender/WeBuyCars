@@ -6,8 +6,8 @@ namespace WeBuyCars.Models
 {
     public class Vehicle
     {
-        public int VehicleTypeId { get; set; }
-        public int Specs { get; set; }
+        public int VehicleTypeId { get; }
+        public int Specs { get;  }
         public int Millage { get; }
         public int Color { get; }
         public int ServiceHistory { get; }
@@ -24,7 +24,5 @@ namespace WeBuyCars.Models
             BookValue = bookvalue;
             Year = year;
         }
-
-        
     }
 }

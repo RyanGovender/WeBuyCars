@@ -9,6 +9,10 @@ namespace WeBuyCars.LogicalLayer
     {
         public static List<Model> modelsList = GetAllModels();
         private static List<int> makeIdList = new List<int>();
+        public static int MinId = 0;
+        public static int MaxId = 0;
+        public static int VehicleTypeCount = 0;
+        private static int _minValue = 0;
 
         public static List<Model> GetAllModels()
         {
@@ -32,6 +36,7 @@ namespace WeBuyCars.LogicalLayer
             {
                 if(item.VehicleTypeId == vehicletypeId && !makeIdList.Contains(item.MakeId))
                 {
+                    VehicleTypeCount++;
                     Console.WriteLine($"{item.MakeId} Make: {MakeLogicLayer.GetMake(item.MakeId)}");
                     makeIdList.Add(item.MakeId);
                 }
@@ -44,9 +49,12 @@ namespace WeBuyCars.LogicalLayer
             {
                 if(item.MakeId == makeId)
                 {
+                    if (MinId == _minValue) MinId = item.Id;
                     Console.WriteLine($"{item.Id} - {item.ModelName}");
+                    MaxId=item.Id;
                 }
             }
+            Console.WriteLine($"{_minValue} - Not Sure");
         }
     }
 }
