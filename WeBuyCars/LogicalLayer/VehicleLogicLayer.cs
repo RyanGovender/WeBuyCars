@@ -78,5 +78,14 @@ namespace WeBuyCars.LogicalLayer
             }
            return _returnDefaultAmount;
         }
+
+        public static bool ChecKPaintRestrictions(int vehicleTypeId, int paint)
+        {
+            foreach(var item in DataLayer.PaintRestrictions())
+            {
+                if (item.Value == vehicleTypeId && item.Key == paint) return true;
+            }
+            return false;
+        }
     }
 }

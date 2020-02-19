@@ -114,7 +114,7 @@ namespace WeBuyCars.LogicalLayer
             return paintCost;
         }
 
-        public static Dictionary<int,int> PaintRestrictions()
+        public static Dictionary<int,int> PaintRestrictions()// paint id and vehicle id
         {
             var restrictions = new Dictionary<int, int>
             {
