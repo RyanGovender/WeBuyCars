@@ -63,6 +63,7 @@ namespace WeBuyCars.LogicalLayer
                 temp = Console.ReadLine();
                 if(temp.Equals(ModelsLogicLayer.NotSureValue))
                 {
+                    _model = 0;
                     break;
                 }
             } while (!int.TryParse(temp, out _model) || _model < ModelsLogicLayer.MinId || _model > ModelsLogicLayer.MaxId);
