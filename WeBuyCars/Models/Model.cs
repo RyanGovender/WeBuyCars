@@ -6,10 +6,10 @@ namespace WeBuyCars.Models
 {
     public class Model
     {
-        public int Id { get; set; }
-        public int VehicleTypeId { get; set; }
-        public int MakeId { get; set; }
-        public string ModelName { get; set; }
+        public int Id { get;}
+        public int VehicleTypeId { get; }
+        public int MakeId { get; }
+        public string ModelName { get; }
 
         public Model(int id, int makeId, string modelName,int vehicleTypeId)
         {

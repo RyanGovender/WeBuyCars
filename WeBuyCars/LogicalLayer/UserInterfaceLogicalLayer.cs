@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WeBuyCars.Models;
 
 namespace WeBuyCars.LogicalLayer
 {
@@ -34,9 +35,10 @@ namespace WeBuyCars.LogicalLayer
             GetPaint();
             GetServiceHistory();
 
-            var car = new VehicleLogicLayer(_vehicleType, _specs, _millage, _paint, _serviceHistory, _booKValue, _year);
+            var car = new Vehicle(_vehicleType, _specs, _millage, _paint, _serviceHistory, _booKValue, _year);
+            var CalculateCarCost = new VehicleLogicLayer(car);
 
-            DisplayConsole("\nFinal Cost :" + car.CalculateTotalCost());
+            DisplayConsole("\nFinal Cost :" + CalculateCarCost.CalculateTotalCost());
             Console.ReadKey();
         }
 
