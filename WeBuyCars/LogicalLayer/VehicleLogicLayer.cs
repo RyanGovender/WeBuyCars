@@ -24,7 +24,7 @@ namespace WeBuyCars.LogicalLayer
             return _vehicle.BookValue + CalculateSericeHistoryCost() + CalculateSpecsCost() + CalculateMileageCost() + CalculateYearCost() + CalculateCostOfPaint();
         }
 
-        public double CalculateSericeHistoryCost()
+        private double CalculateSericeHistoryCost()
         {
             foreach (var item in DataLayer.GetServiceType())
             {
@@ -33,7 +33,7 @@ namespace WeBuyCars.LogicalLayer
             return _returnDefaultAmount;
         }
 
-        public double CalculateSpecsCost()
+        private double CalculateSpecsCost()
         {
             foreach (var item in DataLayer.GetSpecsCostData())
             {
@@ -42,17 +42,17 @@ namespace WeBuyCars.LogicalLayer
             return _returnDefaultAmount;
         }
 
-        public double CalculateMileageCost()
+        private double CalculateMileageCost()
         {
             return DoMilleageOrYearCheck(DataLayer.GetKmBracket(), _vehicle.Millage,DataLayer.GetExtraCostForBracket());
         }
 
-        public double CalculateYearCost()
+        private double CalculateYearCost()
         {
             return DoMilleageOrYearCheck(DataLayer.GetYearBrackets(), _vehicle.Year,DataLayer.GetExtraCostForYearBracket());
         }
 
-        public double DoMilleageOrYearCheck(List<Tuple<int, int, int, double>> data, int value, List<Tuple<int, int, double>> extraCost)
+        private double DoMilleageOrYearCheck(List<Tuple<int, int, int, double>> data, int value, List<Tuple<int, int, double>> extraCost)
         {
             foreach (var bracket in data)
             {
@@ -69,8 +69,8 @@ namespace WeBuyCars.LogicalLayer
             }
             return _returnDefaultAmount;
         }
-      
-        public double CalculateCostOfPaint()
+
+        private double CalculateCostOfPaint()
         {
             foreach (var item in DataLayer.GetPaintTypes())
             {
@@ -86,6 +86,23 @@ namespace WeBuyCars.LogicalLayer
                 if (item.Value == vehicleTypeId && item.Key == paint) return true;
             }
             return false;
+        }
+
+        public void DisplayVehicleReport(int makeId)
+        {
+            string specs;
+            DataLayer.SpecTypes().TryGetValue(_vehicle.Specs, out specs);
+            string service;
+            DataLayer.ServiceTypes().TryGetValue(_vehicle.ServiceHistory, out service);
+
+            Console.WriteLine($"\nMake : {MakeLogicLayer.GetMake(makeId)}" +
+                $"\nModel : {ModelsLogicLayer.GetModelName((int)_vehicle.ModelId)}" +
+                $"\nYear : {_vehicle.Year}" +
+                $"\nMillage : {_vehicle.Millage}km" +
+                $"\nSpecs : {specs}" +
+                $"\nService Histrtoy : {service}" +
+                $"\nBook Value : {_vehicle.BookValue}" +
+                $"\nSelling Price : R{CalculateTotalCost()}");
         }
     }
 }

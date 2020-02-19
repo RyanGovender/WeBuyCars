@@ -20,7 +20,6 @@ namespace WeBuyCars.LogicalLayer
 
         public static void RunProgram()
         {
-           
             do
             {
                 GetVehicleTypes();
@@ -28,6 +27,7 @@ namespace WeBuyCars.LogicalLayer
             } while (!ConfirmAvailableVehicle());
 
             GetMakes();
+
             GetBookValue();
             GetYear();
             GetMillage();
@@ -35,23 +35,14 @@ namespace WeBuyCars.LogicalLayer
             GetPaint();
             GetServiceHistory();
 
-            var car = new Vehicle(_vehicleType, _specs, _millage, _paint, _serviceHistory, _booKValue, _year);
+            var car = new Vehicle(_vehicleType, _specs, _millage, _paint, _serviceHistory, _booKValue, _year,_model);
             var CalculateCarCost = new VehicleLogicLayer(car);
 
-            DisplayConsole("\nFinal Cost :" + CalculateCarCost.CalculateTotalCost());
+            CalculateCarCost.DisplayVehicleReport(_make);
             Console.ReadKey();
         }
 
-        public static bool ConfirmAvailableVehicle()
-        {
-            if(ModelsLogicLayer.VehicleTypeCount == _minValue)
-            {
-                DisplayConsole("\nNone of the selected vehicle are available.");
-                return false;
-            }
-            return true;
-        }
-
+    
         public static void GetVehicleTypes()
         {
             VehicleTypeLogicLayer.DisplayVehicleTypes();
@@ -141,6 +132,16 @@ namespace WeBuyCars.LogicalLayer
 
             } while (!int.TryParse(data, out returnValue) || returnValue <= minValue || returnValue > maxValue );
             return returnValue;
+        }
+
+        public static bool ConfirmAvailableVehicle()
+        {
+            if (ModelsLogicLayer.VehicleTypeCount == _minValue)
+            {
+                DisplayConsole("\nNone of the selected vehicle are available.");
+                return false;
+            }
+            return true;
         }
 
         private static void DisplayConsole(string message)

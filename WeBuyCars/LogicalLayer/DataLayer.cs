@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WeBuyCars.Models;
 
 namespace WeBuyCars.LogicalLayer
 {
@@ -122,6 +123,15 @@ namespace WeBuyCars.LogicalLayer
             };
 
             return restrictions;
+        }
+
+        public static List<Vehicle> GetAllVehicleForSale()
+        {
+            var vehicles = new List<Vehicle> { 
+            
+                new Vehicle(1,1,25000,1,1,250000,2014,8)
+            };
+            return vehicles;
         }
     }
 }

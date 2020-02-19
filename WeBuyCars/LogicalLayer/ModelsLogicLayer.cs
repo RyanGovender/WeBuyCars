@@ -27,7 +27,8 @@ namespace WeBuyCars.LogicalLayer
                 new Model(6,2,"C200",1),
                 new Model(7,2,"CLA45",1),
                 new Model(8,3,"M3",1),
-                new Model(9,1,"H2000",2)
+                new Model(9,1,"H2000",2),
+               // new Model(10,2,"Vito Bus",3)
             };
             return modelsList;
         }
@@ -57,6 +58,16 @@ namespace WeBuyCars.LogicalLayer
                 }
             }
             Console.WriteLine($"\t({NotSureValue}) - Not Sure");
+        }
+
+        public static string GetModelName(int modelId)
+        {
+            foreach (var item in modelsList)
+            {
+                if (item.Id == modelId) return item.ModelName;
+            }
+
+            return "Error";
         }
     }
 }

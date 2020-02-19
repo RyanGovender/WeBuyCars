@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WeBuyCars.Models;
 
 namespace WeBuyCars.LogicalLayer
 {
@@ -30,6 +31,7 @@ namespace WeBuyCars.LogicalLayer
             }
         }
 
+      
         private static void DisplayConsole(string item1, string item2)
         {
             Console.WriteLine($"\t({item1}) - {item2}");
