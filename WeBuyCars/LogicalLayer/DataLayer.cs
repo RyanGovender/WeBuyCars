@@ -56,51 +56,55 @@ namespace WeBuyCars.LogicalLayer
             return specsData;
         }
 
-        public static List<Tuple<int,int, int, double>> GetKmBracket() // Bracket Id , Min km, Max Km, baseCost
+        public static List<Bracket> GetKmBracket()
         {
-            var brackets = new List<Tuple<int, int, int, double>>{
-                new Tuple<int, int, int, double>(1,0,100000,30000),
-                new Tuple<int, int, int, double>(2,100000,150000,15000),
-                new Tuple<int, int, int, double>(3,150000,int.MaxValue,5000)
+            var brackets = new List<Bracket>
+            {
+                new Bracket(1,0,100000,30000),
+                new Bracket(2,100000,150000,15000),
+                new Bracket(3,150000,int.MaxValue,5000)
             };
             return brackets;
         }
 
-        public static List<Tuple<int,int,double>> GetExtraCostForBracket() // Bracket Id, vehicle type id, Extra cost
+        public static List<ExtraCostBracket> GetExtraCostBrackets()//Millage
         {
-            var extraCost = new List<Tuple<int, int, double>>
+            var extraCost = new List<ExtraCostBracket>
             {
-                new Tuple<int, int, double>(1,1,0),
-                new Tuple<int, int, double>(2,1,0),
-                new Tuple<int, int, double>(3,1,0),
-                new Tuple<int, int, double>(1,2,0.4),
-                new Tuple<int, int, double>(2,2,0.3),
-                new Tuple<int, int, double>(3,2,0.1),
+                new ExtraCostBracket(1,1,0),
+                new ExtraCostBracket(2,1,0),
+                new ExtraCostBracket(3,1,0),
+                new ExtraCostBracket(1,2,0.4),
+                new ExtraCostBracket(2,2,0.3),
+                new ExtraCostBracket(3,2,0.1)
             };
             return extraCost;
         }
 
-        public static List<Tuple<int, int, int, double>> GetYearBrackets()
+
+        public static List<Bracket> GetYearBrackets()
         {
-            var brackets = new List<Tuple<int, int, int, double>>{
-                new Tuple<int, int, int, double>(1,1886,2011,5000),
-                new Tuple<int, int, int, double>(2,2011,2018,10000),
-                new Tuple<int, int, int, double>(3,2019,DateTime.Now.Year,30000)
+            var brackets = new List<Bracket>
+            {
+                new Bracket(1,1886,2011,5000),
+                new Bracket(2,2011,2018,10000),
+                new Bracket(3,2019,DateTime.Now.Year,30000)
             };
             return brackets;
         }
 
-        public static List<Tuple<int, int, double>> GetExtraCostForYearBracket() // Bracket Id, vehicle type id, Extra cost
+        public static List<ExtraCostBracket> GetExtraCostBracketsForYear()
         {
-            var extraCost = new List<Tuple<int, int, double>>
+            var extraCost = new List<ExtraCostBracket>
             {
-                new Tuple<int, int, double>(1,1,0),
-                new Tuple<int, int, double>(2,1,0),
-                new Tuple<int, int, double>(3,1,0),
-                new Tuple<int, int, double>(1,2,0.15),
-                new Tuple<int, int, double>(2,2,0.10),
-                new Tuple<int, int, double>(3,2,0.05),
+                new ExtraCostBracket(1,1,0),
+                new ExtraCostBracket(2,1,0),
+                new ExtraCostBracket(3,1,0),
+                new ExtraCostBracket(1,2,0.15),
+                new ExtraCostBracket(2,2,0.10),
+                new ExtraCostBracket(3,2,0.05)
             };
+
             return extraCost;
         }
 
@@ -123,15 +127,6 @@ namespace WeBuyCars.LogicalLayer
             };
 
             return restrictions;
-        }
-
-        public static List<Vehicle> GetAllVehicleForSale()
-        {
-            var vehicles = new List<Vehicle> { 
-            
-                new Vehicle(1,1,25000,1,1,250000,2014,8)
-            };
-            return vehicles;
         }
     }
 }

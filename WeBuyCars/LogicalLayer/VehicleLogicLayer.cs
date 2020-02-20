@@ -44,30 +44,34 @@ namespace WeBuyCars.LogicalLayer
 
         private double CalculateMileageCost()
         {
-            return DoMilleageOrYearCheck(DataLayer.GetKmBracket(), _vehicle.Millage,DataLayer.GetExtraCostForBracket());
+            return DoMilleageOrYearCheck(DataLayer.GetKmBracket(), _vehicle.Millage,DataLayer.GetExtraCostBrackets());
         }
 
         private double CalculateYearCost()
         {
-            return DoMilleageOrYearCheck(DataLayer.GetYearBrackets(), _vehicle.Year,DataLayer.GetExtraCostForYearBracket());
+            return DoMilleageOrYearCheck(DataLayer.GetYearBrackets(), _vehicle.Year,DataLayer.GetExtraCostBracketsForYear());
         }
 
-        private double DoMilleageOrYearCheck(List<Tuple<int, int, int, double>> data, int value, List<Tuple<int, int, double>> extraCost)
+        private double DoMilleageOrYearCheck(List<Bracket> data, int value, List<ExtraCostBracket> extraCost)
         {
             foreach (var bracket in data)
             {
-                if (value >= bracket.Item2 && value < bracket.Item3)
+                if (value >= bracket.MinValue && value < bracket.MaxValue)
                 {
-                    foreach (var item in extraCost)
-                    {
-                        if (item.Item1 == bracket.Item1 && item.Item2 == _vehicle.VehicleTypeId)
-                        {
-                            return bracket.Item4 + bracket.Item4 * item.Item3;
-                        }
-                    }
+                  return bracket.BaseCost + bracket.BaseCost * GetExtraCostBasedOnVehicleType(bracket.Id,extraCost);
                 }
             }
             return _returnDefaultAmount;
+        }
+
+        public double GetExtraCostBasedOnVehicleType(int bracketId,List<ExtraCostBracket> extra)
+        {
+            var item = extra.Find(x => x.BracketId == bracketId && x.VehicleTypeId == _vehicle.VehicleTypeId);
+            if (extra.Contains(item))
+            {
+                return item.ExtraCost;
+            }
+            return _returnDefaultAmount;  
         }
 
         private double CalculateCostOfPaint()
@@ -90,10 +94,8 @@ namespace WeBuyCars.LogicalLayer
 
         public void DisplayVehicleReport(int makeId)
         {
-            string specs;
-            DataLayer.SpecTypes().TryGetValue(_vehicle.Specs, out specs);
-            string service;
-            DataLayer.ServiceTypes().TryGetValue(_vehicle.ServiceHistory, out service);
+            DataLayer.SpecTypes().TryGetValue(_vehicle.Specs, out string specs);
+            DataLayer.ServiceTypes().TryGetValue(_vehicle.ServiceHistory, out string service);
 
             Console.WriteLine($"\nMake : {MakeLogicLayer.GetMake(makeId)}" +
                 $"\nModel : {ModelsLogicLayer.GetModelName((int)_vehicle.ModelId)}" +

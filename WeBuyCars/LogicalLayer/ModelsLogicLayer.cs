@@ -28,7 +28,7 @@ namespace WeBuyCars.LogicalLayer
                 new Model(7,2,"CLA45",1),
                 new Model(8,3,"M3",1),
                 new Model(9,1,"H2000",2),
-               // new Model(10,2,"Vito Bus",3)
+                new Model(10,2,"Vito Bus",3)
             };
             return modelsList;
         }
